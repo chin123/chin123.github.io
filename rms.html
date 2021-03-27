@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<script>
+var supportCount = 0;
+var openCount = 0;
+var openOrgs = 0;
+fetch('https://rms-support-letter.github.io/')
+  .then(res => res.text()).then(res => parseS(res));
+fetch('https://rms-open-letter.github.io/')
+  .then(res => res.text()).then(res => parseO(res));
+
+
+var parseS = function(html) {
+	var parser = new DOMParser();
+	var doc = parser.parseFromString(html, 'text/html');
+	console.log("doc", html);
+	var ol = doc.querySelector('ol');
+	console.log("Support:", ol.childElementCount);
+	supportCount = ol.childElementCount;
+	var el = document.getElementById('support');
+	el.textContent = supportCount;
+}
+var parseO = function(html) {
+	var parser = new DOMParser();
+	var doc = parser.parseFromString(html, 'text/html');
+	console.log("doc2", html);
+	var ol = doc.querySelectorAll('ol')[1];
+	console.log("Open:", ol.childElementCount);
+	openCount = ol.childElementCount
+	var ol = doc.querySelectorAll('ol')[0];
+	console.log("Open:", ol.childElementCount, "organizations");
+	openOrgs = ol.childElementCount;
+	var el = document.getElementById('open');
+	el.textContent = openCount + " and " + openOrgs + " organizations";
+}
+</script>
+<body>
+<center>
+<table style="text-align:center;">
+<thead>
+<th>
+<a href="https://rms-open-letter.github.io">rms-open-letter</a>
+</th>
+<th>
+<a href="https://rms-support-letter.github.io">rms-support-letter</a>
+</th>
+</thead>
+<tr>
+<td id="open">
+0
+</td>
+<td id="support">
+0
+</td>
+</tr>
+</table>
+</center>
+</body>
+</html>
