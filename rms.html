@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 <script>
+var url = "https://github.com/chin123/chin123.github.io/blob/master/Freesoftwaresong_126_mix.ogg?raw=true"
+
+var playAudio = function() {
+	var a = new Audio(url);
+	a.play();
+}
+
+playAudio();
 var supportCount = 0;
 var openCount = 0;
 var openOrgs = 0;
@@ -54,6 +62,7 @@ var parseO = function(html) {
 </td>
 </tr>
 </table>
+<button onClick="playAudio();">Audio</button>
 </center>
 </body>
 </html>
